@@ -1,15 +1,12 @@
 # scraper.py
 
-import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
 
-# Use relative import for utils as it's in the same package
+
 from .utils import parse_time_string, scroll_to_bottom
-# Use absolute import for settings based on the project structure
-# from ..config.settings import BASE_URL, WAIT_TIME, SCROLL_WAIT_TIME # Import necessary settings
 from config.settings import BASE_URL, WAIT_TIME, SCROLL_WAIT_TIME # Import necessary settings
 
 

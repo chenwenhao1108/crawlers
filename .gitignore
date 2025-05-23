@@ -9,3 +9,7 @@ chromedriver-win64/
 
 # cookie file
 cookies.pkl
+
+# data
+data/
+

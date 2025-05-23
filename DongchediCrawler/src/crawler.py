@@ -10,7 +10,7 @@ from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 
 # Change relative imports to absolute imports based on the package structure
-from src.utils import load_cookies, save_cookies, manual_login, load_progress, save_progress
+from src.utils import load_cookies, manual_login, load_progress, save_progress
 from src.scraper import get_posts_on_page, get_replies_for_post # Add scraper import
 from config.settings import (
     CHROME_DRIVER_URL, COOKIES_FILE, USER_PROFILE_URL, POSTS_FILE,
