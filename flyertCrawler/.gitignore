@@ -1,0 +1,11 @@
+# Python cache
+__pycache__/
+
+# ChromeDriver
+chromedriver-win64/
+
+# Virtual environment
+.venv/
+
+# cookie file
+cookies.pkl
