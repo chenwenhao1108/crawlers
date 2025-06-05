@@ -125,6 +125,11 @@ def get_article_links_by_page(
         with open("data/links.json", "r", encoding="utf-8") as f:
             existing_links = json.load(f)
 
+        if len(existing_links) == 0:
+            with open("data/links.json", "w", encoding="utf-8") as f:
+                json.dump({"hotel": hotel, "links": links}, f, ensure_ascii=False, indent=4)
+            return links
+        
         for existing_hotel in existing_links:
             if existing_hotel["hotel"] == hotel:
                 unique_links = [
@@ -145,39 +150,18 @@ def get_all_links(driver):
     """
     调用get_article_links_by_page函数获取所有文章链接
     """
-    hotels = [
-        # '惠庭',
-        # '凯悦嘉轩',
-        # '凯悦嘉寓',
-        # '馨乐庭',
-        # '源宿',
-        # '诺富特',
-        # '智选假日',
-        # '万枫',
-        # '美居',
-        # '亚朵酒店',
-        # '桔子水晶',
-        # '城际',
-        # '维也纳国际',
-        # '丽枫',
-        # '途家盛捷',
-        # '亚朵轻居'
+    keywords = [
+        '智能酒店'
     ]
 
     search_result_links = [
-        # 'https://www.flyert.com.cn/search.php?mod=forum&adv=&srchuname=&searchid=6168&srchtype=title&attach=&srchfid=&before=0&srchfrom=0&srchfilter=all&src_sp=&searchsubmit=yes&kw=Home2&orderby=dateline&ascdesc=desc',
-        # 'https://www.flyert.com.cn/search.php?mod=forum&adv=&srchuname=&searchid=6207&srchtype=fulltext&attach=&srchfid=&before=0&srchfrom=0&srchfilter=all&src_sp=&searchsubmit=yes&kw=Hyatt+Place&orderby=dateline&ascdesc=desc',
-        # 'https://www.flyert.com.cn/search.php?mod=forum&adv=&srchuname=&searchid=6233&srchtype=fulltext&attach=&srchfid=&before=0&srchfrom=0&srchfilter=all&src_sp=&searchsubmit=yes&kw=Hyatt+House&orderby=dateline&ascdesc=desc',
-        # 'https://www.flyert.com.cn/search.php?mod=forum&adv=&srchuname=&searchid=6299&srchtype=fulltext&attach=&srchfid=&before=0&srchfrom=0&srchfilter=all&src_sp=&searchsubmit=yes&kw=Element&orderby=dateline&ascdesc=desc'
-        # 'https://www.flyert.com.cn/search.php?mod=forum&adv=&srchuname=&searchid=6333&srchtype=fulltext&attach=&srchfid=&before=0&srchfrom=0&srchfilter=all&src_sp=&searchsubmit=yes&kw=Novotel&orderby=dateline&ascdesc=desc',
-        # 'https://www.flyert.com.cn/search.php?mod=forum&adv=&srchuname=&searchid=6356&srchtype=fulltext&attach=&srchfid=&before=0&srchfrom=0&srchfilter=all&src_sp=&searchsubmit=yes&kw=Holiday+Inn+Express&orderby=dateline&ascdesc=desc',
-        "https://www.flyert.com.cn/search.php?mod=forum&adv=&srchuname=&searchid=6375&srchtype=fulltext&attach=&srchfid=&before=0&srchfrom=0&srchfilter=all&src_sp=&searchsubmit=yes&kw=Fairfield+Inn&orderby=dateline&ascdesc=desc",
+        "https://www.flyert.com.cn/search.php?mod=forum&adv=&srchuname=&orderby=&ascdesc=desc&attach=&before=0&srchfrom=0&srchfilter=all&src_sp=&searchsubmit=yes&srchtxt=%D6%C7%C4%DC%BE%C6%B5%EA&srchtype=title"
     ]
 
-    for hotel, search_result_link in zip(hotels, search_result_links):
-        print(f"正在处理酒店：{hotel}")
+    for keyword, search_result_link in zip(keywords, search_result_links):
+        print(f"正在处理关键词：{keyword}")
         print(f"链接：{search_result_link}")
-        get_article_links_by_page(hotel, search_result_link, driver)
+        get_article_links_by_page(keyword, search_result_link, driver, startTime=datetime.strptime("2018-1-1", "%Y-%m-%d"), endTime=datetime.strptime("2025-6-6", "%Y-%m-%d"))
     driver.quit()
 
 

@@ -4,6 +4,7 @@ import time
 import random
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 from pprint import pprint
 from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
@@ -131,7 +132,8 @@ def test_cookies():
     print(
         "测试cookies文件是否已获取。若无，请在弹出的窗口中登录，登录完成后，窗口将关闭；若有，窗口会立即关闭"
     )
-    driver = webdriver.Chrome(service=Service("chromedriver-win64/chromedriver.exe"))
+    service = Service(ChromeDriverManager(url="https://registry.npmmirror.com/-/binary/chromedriver").install())
+    driver = webdriver.Chrome(service=service)
     driver.get("https://www.flyert.com.cn/")
     if not load_cookies(driver, cookies_file):
         manual_login(driver, cookies_file)
